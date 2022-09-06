@@ -1,6 +1,3 @@
-from cgitb import text
-from distutils.cmd import Command
-from sqlite3 import Row
 from tkinter import * 
 from dicegame import *
         
@@ -15,6 +12,7 @@ Label(frame, text="Input number").grid(column=100, row=200)
 
 num_entry = Entry(frame).grid(column=200, row=200)
 get_num = master.getint(num_entry)
+
 
 
 master.mainloop()  
