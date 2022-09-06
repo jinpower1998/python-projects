@@ -1,26 +1,20 @@
-from tkinter import *  
+from cgitb import text
+from distutils.cmd import Command
+from sqlite3 import Row
+from tkinter import * 
+from dicegame import *
         
-top = Tk()  
-top.geometry("140x100")  
-frame = Frame(top)  
+master = Tk()  
+master.geometry("800x600")  
+frame = Frame(master)  
 frame.pack()  
 
-leftframe = Frame(top)  
-leftframe.pack(side = LEFT)  
 
-rightframe = Frame(top)  
-rightframe.pack(side = RIGHT)  
+dice_button = Button(frame, text="dice !",  command=RollDice.rand_number).grid(column=600, row=600)
+Label(frame, text="Input number").grid(column=100, row=200)
 
-btn1 = Button(frame, text="Submit", fg="red",activebackground = "red")  
-btn1.pack(side = LEFT)  
+num_entry = Entry(frame).grid(column=200, row=200)
+get_num = master.getint(num_entry)
 
-btn2 = Button(frame, text="Remove", fg="brown", activebackground = "brown")  
-btn2.pack(side = RIGHT)  
 
-btn3 = Button(rightframe, text="Add", fg="blue", activebackground = "blue")  
-btn3.pack(side = LEFT)  
-
-btn4 = Button(leftframe, text="Modify", fg="black", activebackground = "white")  
-btn4.pack(side = RIGHT)  
-
-top.mainloop()  
+master.mainloop()  
