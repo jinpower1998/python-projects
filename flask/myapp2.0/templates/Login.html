@@ -11,10 +11,12 @@
         <h3>Please enter your login details !</h3>
         <p></p>
         <p></p>
-        <label for="email" >Email: </label>
-        <input type="text" id="email" name="email"><br><br>
-        <label for="passwd" >Password: </label>
-        <input type="text" id="passwd" name="passwd"><br><br>
-        <input type="submit" value="login">
-</body>
+        <form method="get">
+            <label for="email" >Email: </label>
+            <input type="text" id="email" name="email" value="{{ email }}"><br><br>
+            <label for="passwd" >Password: </label>
+            <input type="text" id="passwd" name="passwd" value="{{ passwd }}"><br><br>
+            <input type="submit" value="login">
+        </form>
+    </body>
 </html>

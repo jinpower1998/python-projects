@@ -1,20 +1,41 @@
-from flask import Flask, render_template, url_for 
+from flask import Flask, render_template, url_for, request
 #from sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
 
 
+
 @app.route("/")
 def welcome_site():
+    print(request)
     return render_template("main.html")
 
 @app.route("/register")
 def register():
-    return render_template("Register.html")
+    args = request.args
+    fname = args.get("fname")
+    lname = args.get("lname")
+    email = args.get("email")
+    passwd = args.get("passwd")
+
+    print(fname)
+    print(lname)
+    print(email)
+    print(passwd)
+
+    print(request)
+    return render_template("Register.html", fname=fname, lname=lname, email=email, passwd=passwd)
 
 @app.route("/login")
 def login():
-    return render_template("Login.html")
+    args = request.args
+    email = args.get("email")
+    passwd = args.get("passwd")
+
+    print(email)
+    print(passwd)
+
+    return render_template("Login.html", email=email, passwd=passwd)
 
 if __name__ == "__main__":
     app.run()
