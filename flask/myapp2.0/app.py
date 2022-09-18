@@ -3,8 +3,6 @@ from flask import Flask, render_template, url_for, request
 
 app = Flask(__name__)
 
-
-
 @app.route("/")
 def welcome_site():
     print(request)
@@ -31,8 +29,8 @@ def login():
     return render_template("Login.html", email=email, passwd=passwd)
 
 if __name__ == "__main__":
-    app.run()
-#    app.run(host="0.0.0.0", port="443")
+#    app.run()
+    app.run(host="0.0.0.0", port="80")
 
 
 
