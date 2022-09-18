@@ -18,11 +18,6 @@ def register():
     email = args.get("email")
     passwd = args.get("passwd")
 
-    print(fname)
-    print(lname)
-    print(email)
-    print(passwd)
-
     print(request)
     return render_template("Register.html", fname=fname, lname=lname, email=email, passwd=passwd)
 
@@ -32,9 +27,7 @@ def login():
     email = args.get("email")
     passwd = args.get("passwd")
 
-    print(email)
-    print(passwd)
-
+    print(request)
     return render_template("Login.html", email=email, passwd=passwd)
 
 if __name__ == "__main__":

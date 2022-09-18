@@ -13,9 +13,9 @@
         <p></p>
         <form method="get">
             <label for="email" >Email: </label>
-            <input type="text" id="email" name="email" value="{{ email }}"><br><br>
+            <input type="text" id="email" name="email" value="{% if email != None %}{{ email }}{% endif %}"><br><br>
             <label for="passwd" >Password: </label>
-            <input type="text" id="passwd" name="passwd" value="{{ passwd }}"><br><br>
+            <input type="text" id="passwd" name="passwd" value="{% if passwd != None %}{{ passwd }}{% endif %}"><br><br>
             <input type="submit" value="login">
         </form>
     </body>
