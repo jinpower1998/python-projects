@@ -11,7 +11,7 @@ dice_button = Button(frame, text="dice !",  command=RollDice.rand_number).grid(c
 Label(frame, text="Input number").grid(column=100, row=200)
 
 num_entry = Entry(frame).grid(column=200, row=200)
-get_num = master.getint(num_entry)
+#get_num = master.getint(num_entry)
 
 
 
