@@ -1,0 +1,16 @@
+FROM python:3
+
+
+WORKDIR /myapp2.0
+
+RUN pip install flask
+
+ADD app.py app.py
+ADD templates templates
+
+EXPOSE 80
+EXPOSE 443
+
+
+ENTRYPOINT [ "python3" , "app.py" ]
+

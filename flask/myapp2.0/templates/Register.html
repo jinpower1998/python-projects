@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<body>
+    <h1>Register</h1>
+    <p></p>
+    <p></p>
+    <p></p>
+        <h3>For registration,  please enter your details !</h3>
+        <p></p>
+        <p></p>
+        <form method="get">
+            <label for="fname">First name:</label>
+            <input type="text" id="fname" name="fname" value="{% if fname != None %}{{ fname }}{% endif %}"><br><br>
+            <label for="lname">Last name:</label>
+            <input type="text" id="lname" name="lname" value="{% if lname != None %}{{ lname }}{% endif %}"><br><br>
+            <label for="email" >Email: </label>
+            <input type="text" id="email" name="email" value="{% if email != None %}{{ email }}{% endif %}"><br><br>
+            <label for="passwd" >Password: </label>
+            <input type="text" id="passwd" name="passwd" value="{% if passwd != None %}{{ passwd }}{% endif %}"><br><br>
+            <input type="submit" value="Submit">
+        </form>   
+</body>
+</html>
