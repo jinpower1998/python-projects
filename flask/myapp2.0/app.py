@@ -3,6 +3,14 @@ from flask import Flask, render_template, url_for, request
 
 app = Flask(__name__)
 
+class Creds():
+    def __init__(self, fname, lname, email, passwd):
+        self.fname = fname
+        self.lname = lname
+        self.email = email
+        self.passwd = passwd
+        
+
 @app.route("/")
 def welcome_site():
     print(request)
@@ -11,22 +19,22 @@ def welcome_site():
 @app.route("/register")
 def register():
     args = request.args
-    fname = args.get("fname")
-    lname = args.get("lname")
-    email = args.get("email")
-    passwd = args.get("passwd")
+    Creds.fname = args.get("fname")
+    Creds.lname = args.get("lname")
+    Creds.email = args.get("email")
+    Creds.passwd = args.get("passwd")
 
     print(request)
-    return render_template("Register.html", fname=fname, lname=lname, email=email, passwd=passwd)
+    return render_template("Register.html", fname=Creds.fname, lname=Creds.lname, email=Creds.email, passwd=Creds.passwd)
 
 @app.route("/login")
 def login():
     args = request.args
-    email = args.get("email")
-    passwd = args.get("passwd")
+    Creds.email = args.get("email")
+    Creds.passwd = args.get("passwd")
 
     print(request)
-    return render_template("Login.html", email=email, passwd=passwd)
+    return render_template("Login.html", email=Creds.email, passwd=Creds.passwd)
 
 if __name__ == "__main__":
 #    app.run()
