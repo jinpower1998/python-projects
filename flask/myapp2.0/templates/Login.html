@@ -11,12 +11,12 @@
         <h3>Please enter your login details !</h3>
         <p></p>
         <p></p>
-        <form method="get">
+        <form method="post">
             <label for="email" >Email: </label>
             <input type="text" id="email" name="email" value="{% if email != None %}{{ email }}{% endif %}"><br><br>
             <label for="passwd" >Password: </label>
             <input type="text" id="passwd" name="passwd" value="{% if passwd != None %}{{ passwd }}{% endif %}"><br><br>
-            <input type="submit" value="login">
+            <input type="submit" id="button" name="login_button" value="login">
         </form>
     </body>
 </html>

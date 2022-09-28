@@ -21,7 +21,6 @@ def welcome_site():
 #registration site
 @app.route("/register", methods=['GET','POST'])
 def register():
-
     
     firstname = request.form.get("fname")
     lastname = request.form.get("lname")
@@ -59,12 +58,30 @@ def complete_registration():
 #login site
 @app.route("/login",methods=['GET','POST'])
 def login():
-    args = request.args
-    email = args.get("email")
-    passwordwd = args.get("passwd")
+   
+    email = request.form.get("email")
+    password = request.form.get("passwd")
+
+    login_creds = {
+
+        "Email" : email,
+        "Password": password
+    }
+
+
+    if request.method == "POST":
+        if request.form.get("login_button") == "login":
+            print(json.dumps(login_creds, indent=4))
+            if email == "A" and password == "B":
+                return "<h1> login successful !</h1>"
+            else:
+                return "<h1> login failed ! </h1>"
+        else:
+                pass
+
 
     print(request)
-    return render_template("Login.html", email=email, passwd=passwordwd)
+    return render_template("Login.html", email=email, passwd=password)
 
 
 
