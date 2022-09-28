@@ -1,5 +1,5 @@
 
-import requests, urllib
+import requests, urllib, json
 from flask import Flask, render_template, url_for, request
 #from flask_sqlalchemy import SQLAlchemy
 
@@ -39,7 +39,7 @@ def register():
 #post data to external database aan redirect
     if request.method=="POST":
         if request.form.get("submit_button") == "Submit":
-            print(user_data)
+            print(json.dumps(user_data, indent=4))
             return render_template("enter.html", fname=firstname, lname=lastname)
         else:
             print("REQUEST SUBMITTED !")
