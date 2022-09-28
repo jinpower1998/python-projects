@@ -1,8 +1,21 @@
+
 <!DOCTYPE html>
 <html>
 <head>
-</head>
+</head> 
 <body>
-    <h3>Thank you for your registration, you'll now be transferred to the login page !</h3>
+    {% block content %}
+    
+    <h3>Thank you {{ fname }} {{ lname }}  for your registration, you can now log in !</h3>
+    <br></br>
+    <div, class="container">
+            <ul class="navigation">
+                <li class="nvigation-item">
+                    <a href="/login"><h4>Login</h4></a>
+                </li>
+            </ul>
+        </div>
+
+    {% endblock %}
 </body>
 </html>

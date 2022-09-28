@@ -1,5 +1,4 @@
-import email
-from time import sleep
+
 import requests, urllib
 from flask import Flask, render_template, url_for, request
 #from flask_sqlalchemy import SQLAlchemy
@@ -10,17 +9,7 @@ app = Flask(__name__)
 
 # post request
 rq = requests.post
-
-
-#class for Credentials
-class Creds():
-    def __init__(self, fname, lname, email, passwd):
-        self.fname = fname
-        self.lname = lname
-        self.email = email
-        self.passwd = passwd
-        
-      
+    
 #     return user
 
 #main site
@@ -33,47 +22,49 @@ def welcome_site():
 @app.route("/register", methods=['GET','POST'])
 def register():
 
-    args = request.args
-    Creds.fname = args.get("fname")
-    Creds.lname = args.get("lname")
-    Creds.email = args.get("email")
-    Creds.passwd = args.get("passwd")
+    
+    firstname = request.form.get("fname")
+    lastname = request.form.get("lname")
+    email = request.form.get("email")
+    password = request.form.get("passwd")
 
     user_data = {
-        "Firstname" : Creds.fname,
-        "Lastname" : Creds.lname,
-        "Email" : Creds.email,
-        "Password" : Creds.passwd
-    }
-
+        "Firstname" : firstname,
+        "Lastname" : lastname,
+        "Email" : email,
+        "Password" : password
+     }
     print(request)
 
-#post data to external database
+#post data to external database aan redirect
     if request.method=="POST":
         if request.form.get("submit_button") == "Submit":
             print(user_data)
+            return render_template("enter.html", fname=firstname, lname=lastname)
         else:
             print("REQUEST SUBMITTED !")
-            pass
+    else:
+        pass
+         
     
-    return render_template("Register.html",  fname=Creds.fname, lname=Creds.lname, email=Creds.email, passwd=Creds.passwd)
+    return render_template("Register.html",  fname=firstname, lname=lastname, email=email, passwd=password)
 
 
 #enter site
+
 @app.route("/enter", methods=['GET','POST'])
 def complete_registration():
-    return render_template("enter.html")
+        return render_template("enter.html")
 
 #login site
 @app.route("/login",methods=['GET','POST'])
 def login():
     args = request.args
-    Creds.email = args.get("email")
-    Creds.passwd = args.get("passwd")
+    email = args.get("email")
+    passwordwd = args.get("passwd")
 
     print(request)
-    return render_template("Login.html", email=Creds.email, passwd=Creds.passwd)
-
+    return render_template("Login.html", email=email, passwd=passwordwd)
 
 
 
