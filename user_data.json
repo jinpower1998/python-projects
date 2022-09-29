@@ -1,0 +1,27 @@
+{
+    "simple-web-app": [
+        
+        {
+            "PutRequest": {
+                "Item": {
+
+                    "Email": {
+                        "S": "fred@web.de"
+                    },
+                    "Firstname": {
+                        "S": "Fred"
+                    },
+                    "Lastname": {
+                        "S": "Faul"
+                    },
+                    "Password": {
+                        "S": "Fred.1234"
+                    }
+            
+                }
+
+            }
+
+    }] 
+
+}

@@ -1,1 +1,2 @@
-*.db
+.aws
+__pycache__

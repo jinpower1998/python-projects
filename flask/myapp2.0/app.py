@@ -1,6 +1,6 @@
 
 import requests, urllib, json
-from connect_database import *
+from connect_database  import *
 from flask import Flask, render_template, url_for, request
 
 
@@ -8,10 +8,6 @@ from flask import Flask, render_template, url_for, request
 #create flask-app
 app = Flask(__name__)
 
-# post request
-rq = requests.post
-    
-#     return user
 
 #main site
 @app.route("/", methods=['GET','POST'])
@@ -22,7 +18,7 @@ def welcome_site():
 #registration site
 @app.route("/register", methods=['GET','POST'])
 def register():
-    
+    userid = ""
     firstname = request.form.get("fname")
     lastname = request.form.get("lname")
     email = request.form.get("email")
@@ -74,7 +70,7 @@ def login():
 
     if request.method == "POST":
         if request.form.get("login_button") == "login":
-            connect_database.get_data()
+            print(connect_database.get_data(email))
             print(json.dumps(login_creds, indent=4))
             if email == "A" and password == "B":
                 return "<h1> login successful !</h1>"
