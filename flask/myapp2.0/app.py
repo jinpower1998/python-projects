@@ -1,7 +1,8 @@
 
 import requests, urllib, json
+from connect_database import *
 from flask import Flask, render_template, url_for, request
-#from flask_sqlalchemy import SQLAlchemy
+
 
 
 #create flask-app
@@ -38,7 +39,9 @@ def register():
 #post data to external database aan redirect
     if request.method=="POST":
         if request.form.get("submit_button") == "Submit":
-            print(json.dumps(user_data, indent=4))
+            user_data_json = json.dumps(user_data, indent=4)
+            print(user_data_json)
+            connect_database.get_data
             return render_template("enter.html", fname=firstname, lname=lastname)
         else:
             print("REQUEST SUBMITTED !")
@@ -86,8 +89,8 @@ def login():
 
 
 if __name__ == "__main__":
-    app.run()
-    #app.run(host="0.0.0.0", port="80")
+    #app.run()
+    app.run(host="0.0.0.0", port="80")
 
 
 #app.run(debug=True)

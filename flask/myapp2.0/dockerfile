@@ -10,6 +10,7 @@ RUN pip install requests
 
 #add files and folders
 ADD app.py app.py
+ADD connect_database.py connect_database.py 
 ADD templates templates
 
 # expose ports
