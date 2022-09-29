@@ -1,16 +1,21 @@
+#base image
 FROM python:3
 
-
+#define workdir
 WORKDIR /myapp2.0
 
-RUN pip install flask
+# install components 
+RUN pip install flask 
+RUN pip install requests
 
+#add files and folders
 ADD app.py app.py
 ADD templates templates
 
+# expose ports
 EXPOSE 80
 EXPOSE 443
 
-
+# run python-file
 ENTRYPOINT [ "python3" , "app.py" ]
 

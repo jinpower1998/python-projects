@@ -28,9 +28,9 @@ def register():
     password = request.form.get("passwd")
 
     user_data = {
+        "Email" : email,
         "Firstname" : firstname,
         "Lastname" : lastname,
-        "Email" : email,
         "Password" : password
      }
     print(request)
@@ -86,8 +86,8 @@ def login():
 
 
 if __name__ == "__main__":
-#    app.run()
-    app.run(host="0.0.0.0", port="80")
+    app.run()
+    #app.run(host="0.0.0.0", port="80")
 
 
 #app.run(debug=True)
