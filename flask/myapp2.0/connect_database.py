@@ -3,16 +3,16 @@ import json
 from app import *
 import requests as rq
 
-url = "http://localhost:5000/"
+url = ""
 
 class connect_database():
 
     def get_data():
-        requested_data = json.dumps(rq.get(url))
+        requested_data = rq.get(url)
         return requested_data
 
     def post_data():
-        pass
+        return 0
 
 
 

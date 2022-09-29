@@ -41,7 +41,6 @@ def register():
         if request.form.get("submit_button") == "Submit":
             user_data_json = json.dumps(user_data, indent=4)
             print(user_data_json)
-            connect_database.get_data
             return render_template("enter.html", fname=firstname, lname=lastname)
         else:
             print("REQUEST SUBMITTED !")
@@ -71,14 +70,17 @@ def login():
         "Password": password
     }
 
+    
 
     if request.method == "POST":
         if request.form.get("login_button") == "login":
+            connect_database.get_data()
             print(json.dumps(login_creds, indent=4))
             if email == "A" and password == "B":
                 return "<h1> login successful !</h1>"
             else:
                 return "<h1> login failed ! </h1>"
+            
         else:
                 pass
 
@@ -89,8 +91,8 @@ def login():
 
 
 if __name__ == "__main__":
-    #app.run()
-    app.run(host="0.0.0.0", port="80")
+    app.run()
+    #app.run(host="0.0.0.0", port="80")
 
 
 #app.run(debug=True)
