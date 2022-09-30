@@ -4,35 +4,57 @@ from connect_database  import *
 from flask import Flask, render_template, url_for, request
 
 
-
 #create flask-app
 app = Flask(__name__)
 
 
 #main site
 @app.route("/", methods=['GET','POST'])
-def welcome_site():
+def __welcome_site__():
     print(request)
     return render_template("main.html")
 
 #registration site
 @app.route("/register", methods=['GET','POST'])
-def register():
-    userid = ""
+def __register__():
+
     firstname = request.form.get("fname")
     lastname = request.form.get("lname")
     email = request.form.get("email")
     password = request.form.get("passwd")
 
     user_data = {
-        "Email" : email,
-        "Firstname" : firstname,
-        "Lastname" : lastname,
-        "Password" : password
-     }
+    "simple-web-app": [
+        
+        {
+            "PutRequest": {
+                "Item": {
+
+                    "Email": {
+                        "S": email
+                    },
+                    "Firstname": {
+                        "S": firstname
+                    },
+                    "Lastname": {
+                        "S": lastname
+                    },
+                    "Password": {
+                        "S": password
+                    }
+            
+                }
+
+            }
+
+    }] 
+
+    }
+
+
     print(request)
 
-#post data to external database aan redirect
+#post data to external database and redirect
     if request.method=="POST":
         if request.form.get("submit_button") == "Submit":
             user_data_json = json.dumps(user_data, indent=4)
@@ -50,33 +72,41 @@ def register():
 #enter site
 
 @app.route("/enter", methods=['GET','POST'])
-def complete_registration():
+def __complete_registration__():
         return render_template("enter.html")
 
 #login site
 @app.route("/login",methods=['GET','POST'])
-def login():
+def __login__():
    
+    global email 
+    global password
+    global db_email 
+    global db_password
+
     email = request.form.get("email")
     password = request.form.get("passwd")
 
-    login_creds = {
-
-        "Email" : email,
-        "Password": password
-    }
-
-    
 
     if request.method == "POST":
         if request.form.get("login_button") == "login":
-            print(connect_database.get_data(email))
-            print(json.dumps(login_creds, indent=4))
-            if email == "A" and password == "B":
+            response  = connect_database.get_data(email)
+            for i in response:
+                db_email = i["Email"]
+                db_password= i["Password"]
+
+            try: db_email
+            except NameError: db_email = None   
+            if db_email is None:
+                return f"<h1> user with email address '{ email }' does not exist !</h1>"
+
+
+            if email == db_email and password == db_password:
                 return "<h1> login successful !</h1>"
-            else:
+            elif email != db_email or password != db_password:
                 return "<h1> login failed ! </h1>"
-            
+            else:
+                0
         else:
                 pass
 

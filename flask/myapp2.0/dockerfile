@@ -7,6 +7,7 @@ WORKDIR /myapp2.0
 # install components 
 RUN pip install flask 
 RUN pip install requests
+RUN pip install aws-cli
 RUN pip install boto3
 
 #add files and folders
