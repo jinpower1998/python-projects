@@ -7,7 +7,7 @@ WORKDIR /myapp2.0
 # install components 
 RUN pip install flask 
 RUN pip install requests
-RUN pip install aws-cli
+RUN pip install awscli
 RUN pip install boto3
 
 #add files and folders
@@ -15,10 +15,16 @@ ADD app.py app.py
 ADD connect_database.py connect_database.py 
 ADD templates templates
 
+# create aws configuration 
+ENV AWS_ACCESS_KEY_ID = $AWS_ACCESS_KEY_ID
+ENV AWS_SECRET_ACCESS_KEY = $AWS_SECRET_ACCESS_KEY 
+ENV AWS_DEFAULT_REGION = $AWS_DEFAULT_REGION
+
 # expose ports
 EXPOSE 80
 EXPOSE 443
 
+CMD [ "/bin/sh" "-c" "aws configure" ]
 # run python-file
 ENTRYPOINT [ "python3" , "app.py" ]
 
