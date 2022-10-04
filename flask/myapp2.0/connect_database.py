@@ -8,6 +8,8 @@ dynamodb = boto3.resource("dynamodb")
 # choose table 
 table = dynamodb.Table('simple-web-app')
 
+
+
 class connect_database():
 
     # query data by key "Email"
@@ -18,7 +20,18 @@ class connect_database():
         
         items = requested_data["Items"]
         return items
+
     # post data to dynamodb 
-    def post_data():
-        return 0
+    def post_data(email, firstname, lastname, password):
+        put_data = table.put_item(
+
+            Item = {
+                    'Email' :  email,
+                    'Firstname' : firstname,
+                    'Lastname' : lastname,
+                    'Password': password 
+            }           
+        )
+
+        return put_data
 

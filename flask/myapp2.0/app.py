@@ -1,12 +1,13 @@
 
-import requests, urllib, json
 from connect_database  import *
-from flask import Flask, render_template, url_for, request
+from flask import Flask, render_template, request
 
 
 #create flask-app
 app = Flask(__name__)
 
+global db_email 
+global db_password
 
 #main site
 @app.route("/", methods=['GET','POST'])
@@ -23,42 +24,27 @@ def __register__():
     email = request.form.get("email")
     password = request.form.get("passwd")
 
-    user_data = {
-    "simple-web-app": [
-        
-        {
-            "PutRequest": {
-                "Item": {
-
-                    "Email": {
-                        "S": email
-                    },
-                    "Firstname": {
-                        "S": firstname
-                    },
-                    "Lastname": {
-                        "S": lastname
-                    },
-                    "Password": {
-                        "S": password
-                    }
-            
-                }
-
-            }
-
-    }] 
-
-    }
-
-
     print(request)
 
 #post data to external database and redirect
     if request.method=="POST":
         if request.form.get("submit_button") == "Submit":
-            user_data_json = json.dumps(user_data, indent=4)
-            print(user_data_json)
+
+            response = connect_database.get_data(email)
+            for i in response:
+                db_email = i["Email"]
+           
+            try: db_email
+            except NameError: db_email = None
+           
+            if db_email == email:
+                return  f"<h1> user with email address '{ email }' already exits, please use another one !</h1>"
+            elif db_email != email:
+                connect_database.post_data(email, firstname, lastname, password)
+            else:
+                pass
+            
+
             return render_template("enter.html", fname=firstname, lname=lastname)
         else:
             print("REQUEST SUBMITTED !")
@@ -79,11 +65,6 @@ def __complete_registration__():
 @app.route("/login",methods=['GET','POST'])
 def __login__():
    
-    global email 
-    global password
-    global db_email 
-    global db_password
-
     email = request.form.get("email")
     password = request.form.get("passwd")
 
@@ -106,7 +87,7 @@ def __login__():
             elif email != db_email or password != db_password:
                 return "<h1> login failed ! </h1>"
             else:
-                0
+                pass
         else:
                 pass
 
