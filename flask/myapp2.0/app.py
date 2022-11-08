@@ -48,9 +48,7 @@ def __register__():
             return render_template("enter.html", fname=firstname, lname=lastname)
         else:
             print("REQUEST SUBMITTED !")
-    else:
-        pass
-         
+  
     
     return render_template("Register.html",  fname=firstname, lname=lastname, email=email, passwd=password)
 
@@ -88,9 +86,7 @@ def __login__():
                 return "<h1> login failed ! </h1>"
             else:
                 pass
-        else:
-                pass
-
+      
 
     print(request)
     return render_template("Login.html", email=email, passwd=password)
